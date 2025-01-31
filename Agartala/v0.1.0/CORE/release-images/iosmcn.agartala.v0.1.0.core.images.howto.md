@@ -6,7 +6,7 @@ Step 1: Untar the iosmcn.agartala.v0.1.0.core.images.tar.gz to get the deploymen
 tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz
 
 ```
-Step 2: Follow the [IOS MCN v0.1.0 CORE Installation Guide](https://github.com/ios-mcn/ios-mcn-releases/blob/main/Agartala/v0.1.0/CORE/documentation/IOS%20MCN%20v0.1.0%20CORE%20Installation%20Guide.docx) document to deploy the core.
+Step 2: Follow the [IOS MCN Installation Guide](https://github.com/ios-mcn/ios-mcn-releases/blob/main/Agartala/v0.1.0/CORE/documentation/Installation%20Guide.md) document to deploy the core.
 
 
 
