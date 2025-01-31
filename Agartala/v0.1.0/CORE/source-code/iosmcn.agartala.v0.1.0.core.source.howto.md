@@ -7,7 +7,7 @@ tar -xvzf iosmcn.agartala.v0.1.0.core.source.tar.gz
 
 ```
 
-Step 2: Untar the network function to build -  *\<nf>*-0.0.*\<nf-version>*.iosmcn.core.*\<nf>*.tar.gz
+Step 2: Untar the network functions -  *\<nf>*-0.0.*\<nf-version>*.iosmcn.core.*\<nf>*.tar.gz
 
 ```sh
 tar -xvzf amf-0.0.10.iosmcn.core.amf.tar.gz
@@ -30,7 +30,7 @@ Step 5: Push the extracted code to the newly created repository. Follow the GitH
 
 Step 6: A GitHub workflow is already set up for building and testing. Modify the workflow to build and push the image to the container registry.
 
-Step 7: Open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications.
+Step 7: Open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 8 - Step 10.
 
 Step 8: Remove below mentioned line in each workflow job to remove ownership check:
 > if: github.repository_owner == 'ios-mcn-core'
