@@ -101,11 +101,11 @@ _mkdir SD-Core_
 
 _cd SD-Core_
 
-_git clone --recursive https://github.com/5GC-DEV/IOSMCN-CoreDpm.git_
+Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz)
+
+_tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz_
 
 This brings up a Kubernetes cluster, deploy a 5G version of SD-Core on that cluster, and then connect that SD-Core to either an emulated 5G RAN or physical RAN.
-
-_cd IOSMCN-CoreDpm/_
 
 ###  Target Parameter Settings
 

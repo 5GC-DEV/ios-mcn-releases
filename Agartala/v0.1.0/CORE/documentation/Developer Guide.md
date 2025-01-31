@@ -11,82 +11,50 @@ This document is intended only for the core developers for the 5G platform.
 
 # How to build from source code
 
-Clone the repository using the command
+Download file: iosmcn.agartala.v0.1.0.core.source.tar.gz
 
-*git clone --recursive https://github.com/ios-mcn-core/ios-mcn-core.git_*
+_tar -xvzf iosmcn.agartala.v0.1.0.core.source.tar.gz_
 
-_For private repo: The git command will ask for username and password. Provide the github account username. The password requires, provide github ‘Personal access tokens’ as password. For generating Personal access tokens, go to the Github account -> Settings -> Developer Settings. Go to personal access tokens and generate new token. Complete the authentication and issue the token as git hub password._
+Untar the network functions -  *\<nf>*-0.0.*\<nf-version>*.iosmcn.core.*\<nf>*.tar.gz
 
-## Continuous Integration
+```sh
+tar -xvzf amf-0.0.10.iosmcn.core.amf.tar.gz
 
- - Create github and docker account for CI/CD and fork the repository.
- -  Go to **Actions** tab. 
- - Click on “I understand my workflows, go ahead    and enable them”
+```
 
-### Creating Self Hosted Runner
+```sh
+tar -xvzf smf-0.0.6.iosmcn.core.smf.tar.gz
 
- - Go to Settings tab.
- - In the left sidebar, click on Actions, and then click Runners.
- - Click New self-hosted runner.
- - Select the operating system image and architecture of the self-hosted runner machine.
- - There will be instructions showing how to download the runner application and install it on the self-hosted runner machine.
-<![endif]-->
+```
+...
 
-### Creating Workflow
+*\<nf>* can be amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
-- Create a new workflow or use existing one.
-- For creating new workflow, follow the [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow)
-- Define the name of workflow.
-- Specify the events that trigger the workflow
+Step 3: Create a new repository in GitHub.
 
-###  Using Jobs
-- Setup jobs for building, unit test, creating Docker image and pushing Docker image to Docker Hub (Docker build and Docker push commands will be present in Makefile of all the network functions).
-- Follow the steps in [Using jobs in a workflow](https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow#overview) for getting an idea on creating jobs.
+Step 4: Create a new branch named iosmcnmaster and set is as default branch.
 
-![Figure 1: Sample workflow file](./images/devel/fig1-sample-workflow.png)
+Step 5: Push the extracted code to the newly created repository. Follow the GitHub documentation for detailed steps.
 
--	For building the network function image, refer the Makefile located in the root of the repository and try to invoke the Docker build command as a GitHub actions job.
- 
-![Figure 2: docker-build command present in Makefile](./images/devel/fig2-dockerbuild.png)
- 
-![Figure 3: Invoke make docker-build inside a job](./images/devel/fig3-invokedocker.png)
--	For pushing the job to DockerHub, refer the Makefile and try to invoke the Docker push command as a GitHub actions job.  Don’t forget to set environments variables mentioned in the Docker push command.
- 
-![Figure 4: docker-push command present in Makefile](./images/devel/fig4-dockerpush.png)
- 
-![Figure 5: Invoke make docker-push inside a job](./images/devel/fig5-invoke-make.png)
- 
-![Figure 6: Registry and repository details](./images/devel/fig6-registry.png)
-- Alternative method of pushing Docker image without using Makefile command is to use Docker image already built and push it to the DockerHub manually using Docker commands.
- 
-![Figure 7: Tag and push already build image to DockerHub](./images/devel/fig7-tag-push.png)
--	Try to run the jobs in sequential order using ‘needs’ keyword.
- 
-![Figure 8: Usage of needs](./images/devel/fig8-usage-needs.png)
--	Use JayaramRCDAC/amf for reference.
--	To add Docker credentials as secrets, follow Using secrets in GitHub Actions
- 
-![Figure 9: Setting secrets](./images/devel/fig9-setting-secrets.png)
--	GitHub provides a marketplace where pre-built actions are present to use in the workflows.
-Running Workflow
--	Committing the workflow file to a branch in the repository triggers the push event and runs the workflow.
-Monitoring Workflow
--	Monitor the progress of workflows in the Actions tab of the repository.
--	Check the status of each workflow run, view logs, and debug any issues that arise.
- 
-![Figure 10: Sample workflow pipeline](./images/devel/fig10-sampleworkflow.png)
- 
-![Figure 11: Image pushed to DockerHub](./images/devel/fig11-image-pus.png)
-Integration with IDE
--	Download and setup VSCode IDE.
--	Clone a repository using command palette (> git clone).
--	Install GitHub Actions extension.
--	Sign in with the GitHub account and when prompted allow GitHub Actions access to the GitHub account.
--	Push some changes to master (refer GitHub guide document) & the triggered workflow will be visible at GitHub actions side panel.
- 
-![Figure 12: Workflow log inside VSCode](./images/devel/fig12-workflow.png)
+Step 6: A GitHub workflow is already set up for building and testing. Modify the workflow to build and push the image to the container registry.
 
+Step 7: Open the workflow file .github\workflows\iosmcn-master.yml and make the following modifications from Step 8 - Step 10.
 
+Step 8: Remove below mentioned line in each workflow job to remove ownership check:
+
+if: github.repository_owner == 'ios-mcn-core'
+
+Step 9: Update the container registry values in the variables - REGISTRY, DOCKER_REGISTRY (docker.io, ghcr.io).
+
+Step 10: Update the container registry repository username value in the variable - DOCKER_REPOSITORY.
+
+Step 11: Create Secrets for container registry repository username and password with key named - GHCRUSER & GHCRPASS. Refer the GitHub documentation.
+
+Step 12: Go to Actions tab in the GitHub repository. Select the IOSMCN Master workflow.
+
+Step 13: Click on Run workflow.
+
+Step 14: Once the workflow completes successfully, the built image will be pushed to the configured container registry.
 
 ## Deployment
 
