@@ -282,12 +282,13 @@ The above output from ip shows the two interfaces visible to the server, but run
 
 kubectl can be used to see what’s running inside the UPF, where bessd is the name of the container image that implements the UPF, and access and core are the last two interfaces shown below:
 
+_kubectl -n iosmcn exec -ti upf-0 bessd -- ip addr_
 
 ![](./images/install/fig9-.png)
 
 When packets flowing upstream from the gNB arrive on the server’s physical interface, they need to be forwarded over the access interface. This is done by having the following kernel route installed, which should be the case if your Aether installation was successful.
 
-_route -n | grep "Iface\|access”_
+_route -n | grep "Iface\|access"_
 
 ![](./images/install/fig10-.png)
 
@@ -297,8 +298,12 @@ interfaces. Upstream packets arriving on the access interface have their GTP hea
 
 removed and the raw IP packets are forwarded to the core interface. The routes inside the UPF’s bessd container will look something like this:
 
+_kubectl -n iosmcn exec -ti upf-0 bessd -- ip route_
 
 ![](./images/install/fig11-.png)
+
+_route -n | grep "Iface\|core"_
+
 ![](./images/install/fig12.png)
 
 
@@ -342,7 +347,7 @@ _sudo iptables -A FORWARD -i access -o ens18 -j ACCEPT_
 
 To enter the UPF pod, execute the following commands:
 
-_kubectl exec -it upf-0 -n iosmcn bash_
+_kubectl exec -it upf-0 -n iosmcn -- /bin/bash_
 
 Once inside the pod, verify the network interfaces:
 
