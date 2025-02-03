@@ -1,5 +1,5 @@
 ﻿
-# IOS MCN v0.1.0 Agartala Release Installation Guide: SD-Core v0.1
+# IOS MCN v0.1.0 Agartala Release Installation Guide: IOSMCN-Core v0.1
 
 # Introduction
 
@@ -17,7 +17,7 @@ The installation can be proceeded with this documentation and the core can get f
 
 ##  Hardware Requirements
 
-The SD-Core installation requires the following prerequisites
+The IOSMCN-Core installation requires the following prerequisites
 
 - 4 Cores
 
@@ -27,7 +27,7 @@ The SD-Core installation requires the following prerequisites
 
 ##  Software Prerequisites
 
-- Ubuntu 20.04 LTS Operating system
+- Ubuntu 22.04 LTS Operating system
 
 - Git
 
@@ -65,6 +65,12 @@ _pipx ensurepath_
 
 _sudo apt install sshpass netplan.io iptables ethtool_
 
+_sudo apt update_
+
+_sudo apt install ansible –y_
+
+_sudo apt python3-docker_
+
 ##  Prerequisite Environment
 
 ###  Firewall status
@@ -87,7 +93,7 @@ _systemctl status systemd-networkd.service_
 
 Find the interface from the _ifconfig_ command and input the interface name to the following command
 
-_sudo ethtool -K <core-interface> gro off_
+_sudo ethtool -K \<core-interface\> gro off_
 
 ##  Installation of IOS-MCN Core
 
@@ -97,15 +103,15 @@ create a directory for IOS-MCN in home directory
 
 _cd_
 
-_mkdir SD-Core_
+_mkdir IOSMCN-Core_
 
-_cd SD-Core_
+_cd IOSMCN-Core_
 
 Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz)
 
 _tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz_
 
-This brings up a Kubernetes cluster, deploy a 5G version of SD-Core on that cluster, and then connect that SD-Core to either an emulated 5G RAN or physical RAN.
+This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that cluster, and then connect that IOSMCN-Core to either an emulated 5G RAN or physical RAN.
 
 ###  Target Parameter Settings
 
@@ -174,11 +180,13 @@ The successful output looks like
 
 ![Output of Kubernetes installation](./images/install/fig2-output-kubernetes.png)
 
-Figure 2:Output of Kubernetes installation
+Figure 2: Output of Kubernetes installation
 
-###  Pre-Configuration for SD-Core
+###  Pre-Configuration for IOSMCN-Core
 
 Verify the netpan is configured with ip, gateway and dns address.
+
+_nano /etc/netplan/00-installer-config.yaml_
 
 eg.,
 
@@ -206,17 +214,9 @@ If any change on the configuration, execute the command
 
 _sudo netplan apply_
 
-Login to the docker registry using github username and access token
+###  Configure IOSMCN-Core
 
-_sudo docker login ghcr.io -u <github-id> --password-stdin <<< <access-token>_
-
-_Eg.,_
-
-_sudo docker login ghcr.io -u ios5gn --password-stdin <<<  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_
-
-###  Configure SD-Core
-
-Modify the subscribers block of the omec-sub-provision section in file deps/5gc/roles/core/templates/ sdcore-5g-values.yaml to record the IMSI, OPc, and Key values configured onto your SIM cards. For example, the following code block adds IMSIs between 001010000000001 and 001010000000003
+Modify the subscribers block of the omec-sub-provision section in file _deps/5gc/roles/core/templates/iosmcn-5g-values.yaml_ to record the IMSI, OPc, and Key values configured onto your SIM cards. For example, the following code block adds IMSIs between 001010000000001 and 001010000000003
 
 
 ![](./images/install/fig3-config-sd-core.png)
@@ -230,7 +230,7 @@ The second block, network-slices, sets various parameters associated with the _S
 
 ![](./images/install/fig5-config-sd-core.png)
 
-###  Install SD Core
+###  Install IOSMCN-Core
 
 Initiate the installation by the command
 
@@ -238,24 +238,13 @@ _make aether-5gc-install_
 
 The successful outcome shall be verified using the following command
 
-_kubectl get pods -n ios-mcn_
+_kubectl get pods -n iosmcn_
 
 
 ![](./images/install/fig6-install-sd-core.png)
 
-_Fig.3 Success state of SD-Core installation_
+_Figure 3: Success state of IOSMCN-Core installation_
 
-##  Disable Load Balancer
-
-$ kubectl edit cm amf -n ios-mcn
-
-Update Sctplb to false and change mcc,mnc,sst and sd based on the  sdcore-5g-values.yaml configuration
-
-![](./images/install/fig7-loadbalancer.png)
-
-Delete amf pod for update
-
-$kubectl delete pod <pod-name> -n ios-mcn
 
 ##  Install Management Application
 
@@ -285,12 +274,9 @@ _sudo ip route add 192.168.252.0/24 via <core_ip>_
 
 There are two bridges that connect the physical interface with the UPF container. The access bridge connects the UPF downstream to the RAN (this corresponds to 3GPP’s N3 interface) and is assigned IP subnet 192.168.252.0/24 . The core bridge connects the UPF upstream to the Internet (this corresponds to 3GPP’s N6 interface) and is assigned IP subnet 192.168.250.0/24 .
 
-
 ![](./images/install/fig8-verify-network.png)
-The above output from ip shows the two interfaces visible to the server, but running outside
 
-
-the container.
+The above output from ip shows the two interfaces visible to the server, but running outside the container.
 
 ###  Check core and access are properly configured inside the container
 
@@ -356,7 +342,7 @@ _sudo iptables -A FORWARD -i access -o ens18 -j ACCEPT_
 
 To enter the UPF pod, execute the following commands:
 
-_kubectl exec -it upf-0 -n ios-mcn bash_
+_kubectl exec -it upf-0 -n iosmcn bash_
 
 Once inside the pod, verify the network interfaces:
 
@@ -384,18 +370,18 @@ _ip r_
 
 Ensure that the ARP entries for access and core interfaces have the correct MAC addresses. If the MAC addresses do not match, update them as follows:
 
-_sudo arp -s 192.168.252.3 <mac-address-access>_
+_sudo arp -s 192.168.252.3 \<mac-address-access\>_
 
-_sudo arp -s 192.168.250.3 <mac-address-core>_
+_sudo arp -s 192.168.250.3 \<mac-address-core\>_
 
-Replace <mac-access> and <mac-core> with the actual MAC addresses of the access and core interfaces respectively [Inside UPF-POD].
+Replace \<mac-address-access\> and \<mac-address-core\> with the actual MAC addresses of the access and core interfaces respectively [Inside UPF-POD].
 
 ## Related Artifacts & links
 
 | **Document Name** | **Purpose** | **Link** |
 |--|--|--|
-| Developer Guide | Guide for SD-Core developers | [Click Here](./Developer%20Guide.md)|
+| Developer Guide | Guide for IOSMCN-Core developers | [Click Here](./Developer%20Guide.md)|
 | User Guide | Quick user guide | [Click Here](./User%20Guide.md)  |
 | API Guide | API guide | [Click here](./API%20Guide.md)|
-| Troubleshooting Guide  | Troubleshooting guide for SD-Core | [Click here](./Troubleshooting%20Guide.md)|
-| Installation Guide | Installation of SD-Core | [Click here](./Installation%20Guide.md) |
+| Troubleshooting Guide  | Troubleshooting guide for IOSMCN-Core | [Click here](./Troubleshooting%20Guide.md)|
+| Installation Guide | Installation of IOSMCN-Core | [Click here](./Installation%20Guide.md) |
