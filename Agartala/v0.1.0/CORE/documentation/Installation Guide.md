@@ -111,6 +111,8 @@ Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/ios
 
 _tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz_
 
+_cd IOSMCN-CoreDpm_
+
 This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that cluster, and then connect that IOSMCN-Core to either an emulated 5G RAN or physical RAN.
 
 ###  Target Parameter Settings
@@ -265,6 +267,18 @@ Access the Grafana using the URL
 http://<server_ip>:30950
 
 ##  Add Route in gNB
+
+In core machine, run following command to get the AMF service IP:
+
+_kubectl get svc -n iosmcn_
+
+![](./images/install/fig17.png)
+
+Add route in gNB machine to AMF service IP:
+
+_sudo ip route add \<amf-service-ip\> via <core_ip>_
+
+Add route in gNB machine to UPF:
 
 _sudo ip route add 192.168.252.0/24 via <core_ip>_
 
