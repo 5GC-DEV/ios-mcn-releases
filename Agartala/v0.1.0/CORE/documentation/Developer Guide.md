@@ -1,9 +1,9 @@
 ﻿
-# **IOS MCN v0.1.0 Agartala Release Developer Guide: SD-Core v0.1**
+# **IOS MCN v0.1.0 Agartala Release Developer Guide: IOSMCN-Core v0.1**
 
 # Introduction
 
-This guide mentions the options to work with IOS-MCN github repository for the software development for SD-Core.
+This guide mentions the options to work with IOS-MCN github repository for the software development for IOSMCN-Core.
 
 # Purpose and Audience
 
@@ -72,9 +72,9 @@ Step 14: Once the workflow completes successfully, the built image will be pushe
 
 - Check the pod status using the command
 
-	_kubectl get pods -n ios-mcn_
+	_kubectl get pods -n iosmcn_
 
-![Figure 13: pods status](./images/devel/fig13-pod-stats.png)
+![Figure 1: pods status](./images/devel/fig1-pod-stats.png)
 
 ## Related Artifacts & links
 
@@ -82,6 +82,6 @@ Step 14: Once the workflow completes successfully, the built image will be pushe
 |--|--|--|
 | User Guide | Quick user guide | [Click Here](./User%20Guide.md)  |
 | API Guide | API guide | [Click here](./API%20Guide.md)|
-| Troubleshooting Guide  | Troubleshooting guide for SD-Core | [Click here](./Troubleshooting%20Guide.md)|
-| Installation Guide | Installation of SD-Core | [Click here](./Installation%20Guide.md) |
-| Developer Guide | Guide for SD-Core developers | [Click Here](./Developer%20Guide.md)|
+| Troubleshooting Guide  | Troubleshooting guide for IOSMCN-Core | [Click here](./Troubleshooting%20Guide.md)|
+| Installation Guide | Installation of IOSMCN-Core | [Click here](./Installation%20Guide.md) |
+| Developer Guide | Guide for IOSMCN-Core developers | [Click Here](./Developer%20Guide.md)|
