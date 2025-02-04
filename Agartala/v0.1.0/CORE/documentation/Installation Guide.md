@@ -147,7 +147,7 @@ _ip: "10.176.26.86"_
 
 Open _locale_ file
 
-_vi /etc/default/locale_
+_sudo vi /etc/default/locale_
 
 eg.,
 
