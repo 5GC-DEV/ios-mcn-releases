@@ -91,9 +91,9 @@ _sudo ethtool -K \<core-interface\> gro off_
 
 ##  Installation of IOS-MCN Core
 
-###  Clone aether onramp repo
+###  Download core image
 
-create a directory for IOS-MCN in home directory
+create a directory for IOSMCN-Core in home directory as per the following commands
 
 _cd_
 
@@ -101,11 +101,11 @@ _mkdir IOSMCN-Core_
 
 _cd IOSMCN-Core_
 
-Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz)
+Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz) to the directory
 
 _tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz_
 
-_cd IOSMCN-CoreDpm_
+_cd iosmcn.agartala.v0.1.0.core.images/IOSMCN-CoreDpm_
 
 This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that cluster, and then connect that IOSMCN-Core to either an emulated 5G RAN or physical RAN.
 
