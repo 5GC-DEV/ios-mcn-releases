@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2f974c51-41aa-4d95-b88a-84a2eff6138f)﻿
+﻿
 # IOS MCN v0.1.0 Agartala Release Installation Guide: IOSMCN-Core v0.1
 
 # Introduction
