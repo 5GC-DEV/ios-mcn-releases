@@ -1,4 +1,4 @@
-﻿
+![image](https://github.com/user-attachments/assets/2f974c51-41aa-4d95-b88a-84a2eff6138f)﻿
 # IOS MCN v0.1.0 Agartala Release Installation Guide: IOSMCN-Core v0.1
 
 # Introduction
@@ -44,6 +44,8 @@ The IOSMCN-Core installation requires the following prerequisites
 - Python3
 
 - Docker.io
+  
+- openssh-server
 
 - Ethtool
 
@@ -63,7 +65,7 @@ _pipx install --include-deps ansible_
 
 _pipx ensurepath_
 
-_sudo apt install sshpass netplan.io iptables ethtool_
+_sudo apt install sshpass netplan.io iptables openssh-server ethtool_
 
 ##  Prerequisite Environment
 
