@@ -26,7 +26,6 @@ tar -xvzf amf-0.0.10.iosmcn.core.amf.tar.gz
 tar -xvzf smf-0.0.6.iosmcn.core.smf.tar.gz
 
 ```
-...
 
 *\<nf>* can be amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
