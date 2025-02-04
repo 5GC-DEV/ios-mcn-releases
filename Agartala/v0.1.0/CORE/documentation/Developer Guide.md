@@ -11,11 +11,14 @@ This document is intended only for the core developers for the 5G platform.
 
 # How to build from source code
 
-Download file: iosmcn.agartala.v0.1.0.core.source.tar.gz
+Step 1: Untar the iosmcn.agartala.v0.1.0.core.source.tar.gz
 
-_tar -xvzf iosmcn.agartala.v0.1.0.core.source.tar.gz_
+```sh
+tar -xvzf iosmcn.agartala.v0.1.0.core.source.tar.gz
 
-Untar the network functions -  *\<nf>*-0.0.*\<nf-version>*.iosmcn.core.*\<nf>*.tar.gz
+```
+
+Step 2: Untar the network functions -  *\<nf>*-0.0.*\<nf-version>*.iosmcn.core.*\<nf>*.tar.gz
 
 ```sh
 tar -xvzf amf-0.0.10.iosmcn.core.amf.tar.gz
@@ -26,54 +29,62 @@ tar -xvzf amf-0.0.10.iosmcn.core.amf.tar.gz
 tar -xvzf smf-0.0.6.iosmcn.core.smf.tar.gz
 
 ```
+...
 
 *\<nf>* can be amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
-Step 3: Create a new repository in GitHub.
+Step 3: Create a new repository in [GitHub](https://github.com/new).
 
-Step 4: Create a new branch named iosmcnmaster and set is as default branch.
+Step 4: Create a new branch named _cdacmaster_ and set is as default branch.
 
-Step 5: Push the extracted code to the newly created repository. Follow the GitHub documentation for detailed steps.
+Step 5: Push the extracted code to the newly created repository. Follow the GitHub documentation for detailed steps. Make sure the code is pushed to the _cdacmaster_ branch.
 
 Step 6: A GitHub workflow is already set up for building and testing. Modify the workflow to build and push the image to the container registry.
 
-Step 7: Open the workflow file .github\workflows\iosmcn-master.yml and make the following modifications from Step 8 - Step 10.
+Step 7: Open the workflow file **\.github\workflows\cdac-master.yml** and make the following modifications from Step 8 - Step 10.
 
 Step 8: Remove below mentioned line in each workflow job to remove ownership check:
+> if: github.repository_owner == '5GC-DEV'
 
-if: github.repository_owner == 'ios-mcn-core'
+Step 9: Update the container registry values in the variables - *REGISTRY*, *DOCKER_REGISTRY* (docker.io, ghcr.io).
 
-Step 9: Update the container registry values in the variables - REGISTRY, DOCKER_REGISTRY (docker.io, ghcr.io).
+Step 10: Update the container registry repository username value in the variable - *DOCKER_REPOSITORY*.
 
-Step 10: Update the container registry repository username value in the variable - DOCKER_REPOSITORY.
+Step 11: Create Secrets for container registry repository username and password with key named - DCKRUSER & DCKRPASS. Refer the [GitHub documentation](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
 
-Step 11: Create Secrets for container registry repository username and password with key named - GHCRUSER & GHCRPASS. Refer the GitHub documentation.
+Step 12: Go to **Actions tab** in the GitHub repository. Select the IOSMCN Master workflow.
 
-Step 12: Go to Actions tab in the GitHub repository. Select the IOSMCN Master workflow.
-
-Step 13: Click on Run workflow.
+Step 13: Click on **Run workflow** to manually trigger the workflow. The workflow will be triggered automatically when the new changes are pushed to the cdacmaster branch.
 
 Step 14: Once the workflow completes successfully, the built image will be pushed to the configured container registry.
 
 ## Deployment
 
-- Open 5g-control-plane folder in sdcore and edit values.yaml file
+- Open IOSMCN-CoreDpm and edit iosmcn-5g-values.yaml file located in the below mentioned location.
 
-- Change image names in tags to ios-mcn
+>IOSMCN-CoreDpm/deps/5gc/roles/core/templates/iosmcn-5g-values.yaml
 
- - Change 5g-control-plane dependency repository location to above extracted file location
+- Update the image name to the newly built image under the tag section of the yaml file.
 
-- Run the following commands
+```
+5g-control-plane:
+  enable5G: true
+  images:
+	repository: ""    # defaults to Docker Hub
+	tags:
+	  amf: docker.io/iosmcnbuildtest/5gc-amf:master-latest
 
-	_make reset-5g-test_
+```
 
-	_make 5g-test_
+- Run the following command to reset the core.
 
-- Check the pod status using the command
+	_make aether-resetcore_
+
+- Check the pod status using the command.
 
 	_kubectl get pods -n iosmcn_
 
-![Figure 1: pods status](./images/devel/fig1-pod-stats.png)
+![Figure 13: pods status](../../CORE/documentation/images/devel/fig1-pod-stats.png)
 
 ## Related Artifacts & links
 
