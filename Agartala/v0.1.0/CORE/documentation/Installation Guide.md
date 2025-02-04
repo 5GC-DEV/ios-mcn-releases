@@ -65,12 +65,6 @@ _pipx ensurepath_
 
 _sudo apt install sshpass netplan.io iptables ethtool_
 
-_sudo apt update_
-
-_sudo apt install ansible –y_
-
-_sudo apt python3-docker_
-
 ##  Prerequisite Environment
 
 ###  Firewall status
