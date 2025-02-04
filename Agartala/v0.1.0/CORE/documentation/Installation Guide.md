@@ -232,7 +232,7 @@ _Figure 3: Success state of IOSMCN-Core installation_
 
 In core machine, run following command to get the AMF service IP:
 ```
-_kubectl get svc -n iosmcn_
+kubectl get svc -n iosmcn
 ```
 ![](./images/install/fig17.png)
 
@@ -258,7 +258,7 @@ The above output from ip shows the two interfaces visible to the server, but run
 
 kubectl can be used to see what’s running inside the UPF, where bessd is the name of the container image that implements the UPF, and access and core are the last two interfaces shown below:
 ```
-_kubectl -n iosmcn exec -ti upf-0 bessd -- ip addr_
+kubectl -n iosmcn exec -ti upf-0 bessd -- ip addr
 ```
 ![](./images/install/fig9-.png)
 
