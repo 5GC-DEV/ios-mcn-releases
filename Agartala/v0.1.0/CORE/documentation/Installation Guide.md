@@ -157,6 +157,8 @@ _LANG="en_IN.UTF-8"_
 
 _LANGUAGE="en_IN:en"_
 
+Reboot the system for updating the locale
+
 ![Parameter settings in var/main.yml](./images/install/fig1-parameters.png)
 
 Figure 1: Parameter settings in var/main.yml
