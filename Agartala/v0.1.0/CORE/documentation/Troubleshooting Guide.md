@@ -137,7 +137,7 @@ $ kubectl cp iosmcn/upf-0:/opt/bess/bessctl/packet.pcap* /home/cssuser/packet.pc
 -	Issue Title: Pod deletes error
 -	Description: Force to delete pod
 -	Common Solutions:  Delete Pod forcefully
-*$ kubectl delete pod n iosmcn <podname> --force –grace-period=0*
+*$ kubectl delete pod -n iosmcn <podname> --force –grace-period=0*
 ###	Error/Issue 24
 -	Issue Title: Interface creation
 -	Description:  Create Virtual Iface for Iperf

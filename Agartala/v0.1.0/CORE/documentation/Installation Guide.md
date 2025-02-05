@@ -115,7 +115,9 @@ This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that 
 
 Open the hosts.ini file
 
+```
 _vi hosts.ini_
+```
 
 Update IP address, username and password of the system
 
@@ -125,8 +127,9 @@ _node1  ansible_host=10.176.26.86 ansible_user=ios5gn ansible_password=ios5gn an
 
 Open vars/main.yml
 
+```
 _vi  vars/main.yml_
-
+```
 Update data_iface name on _core_:
 
 eg.,
@@ -147,6 +150,8 @@ _amf:_
 
 _ip: "10.176.26.86"_
 
+![Parameter settings in var/main.yml](./images/install/fig1-parameters.png)
+Figure 1: Parameter settings in var/main.yml
 
 If locate is not UTF-8, set locale
 ```
@@ -161,9 +166,9 @@ _LANGUAGE="en_IN:en"_
 
 Reboot the system for updating the locale
 
-![Parameter settings in var/main.yml](./images/install/fig1-parameters.png)
 
-Figure 1: Parameter settings in var/main.yml
+
+
 
 ###   Install Kubernetes
 
