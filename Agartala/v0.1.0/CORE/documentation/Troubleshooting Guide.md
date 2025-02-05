@@ -236,6 +236,12 @@ done
 ``` 
 sudo ip link set dev <interface> mtu 1460
 ```
+###	Error/Issue 31
+-	Issue Title: Netplan error while installation
+-	Description: Set the proper DNS IP
+-	Common Solutions:
+Ensure that the DNS IP is correctly configured in the YAML file located in /etc/netplan/. If no DNS is available on the network, use 8.8.8.8 as the DNS IP.
+
 ##	Frequently Asked Questions
 ###	What is the minimum hardware requirement for installing IOSMCN-Core?
 The core software requires at least 4 CPU cores and 16GB RAM memory to installation.

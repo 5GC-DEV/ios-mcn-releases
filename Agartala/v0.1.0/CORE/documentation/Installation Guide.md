@@ -190,7 +190,14 @@ Figure 2: Output of Kubernetes installation
 
 ###  Pre-Configuration for IOSMCN-Core
 
-Verify the netpan is configured with ip, gateway and dns address.
+Verify the netpan file is configured with IP, Gateway and DNS address.
+
+Common filenames include:
+
+- /etc/netplan/50-cloud-init.yaml
+- /etc/netplan/01-netcfg.yaml
+- /etc/netplan/00-installer-config.yaml
+
 ```
 nano /etc/netplan/00-installer-config.yaml
 ```
@@ -198,7 +205,13 @@ eg.,
 
 ![Netplan configuration](./images/install/fig7-netplan-image.PNG)
 
-If any change on the configuration, execute the command
+where,
+- Replace _ens3_ with the system's network interface.
+- Under the interface section, set the addresses field to the system's IP address.
+- Specify the DNS IP under nameservers.addresses.
+- If no DNS is configured on the network, use 8.8.8.8 as the DNS IP.
+
+If any change on the configuration, execute the command:
 ```
 sudo netplan apply
 ```
