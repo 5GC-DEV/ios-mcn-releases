@@ -151,6 +151,7 @@ _amf:_
 _ip: "10.176.26.86"_
 
 ![Parameter settings in var/main.yml](./images/install/fig1-parameters.png)
+
 Figure 1: Parameter settings in var/main.yml
 
 If locate is not UTF-8, set locale
@@ -174,7 +175,7 @@ Reboot the system for updating the locale
 
 Start installation with the command
 ```
-make aether-k8s-install
+make k8s-install
 ```
 This may take several minutes to complete the installation. On its completion, verify the installation status by the command
 ```
@@ -221,7 +222,7 @@ The second block, network-slices, sets various parameters associated with the _S
 
 Initiate the installation by the command
 ```
-make aether-5gc-install
+make 5gc-install
 ```
 The successful outcome shall be verified using the following command
 ```
@@ -267,7 +268,7 @@ kubectl -n iosmcn exec -ti upf-0 bessd -- ip addr
 ```
 ![](./images/install/fig9-.png)
 
-When packets flowing upstream from the gNB arrive on the server’s physical interface, they need to be forwarded over the access interface. This is done by having the following kernel route installed, which should be the case if your Aether installation was successful.
+When packets flowing upstream from the gNB arrive on the server’s physical interface, they need to be forwarded over the access interface. This is done by having the following kernel route installed, which should be the case if your ios-mcn-core installation was successful.
 ```
 route -n | grep "Iface\|access"
 ```
@@ -304,23 +305,23 @@ sudo ip route add 192.168.250.0/24 dev core
 ```
 ###  Packet Traces
 
-Packet traces are the best way to diagnose your deployment, and the most helpful traces you can capture are shown in the following commands. You can run these on the Aether server, where we use our example ens18 interface for illustrative purposes:
+Packet traces are the best way to diagnose your deployment, and the most helpful traces you can capture are shown in the following commands. You can run these on the core server, where we use our example ens3 interface for illustrative purposes:
 ```
 sudo tcpdump -i any sctp -w sctp-test.pcap
 
-sudo tcpdump -i ens18 port 2152 -w gtp-outside.pcap
+sudo tcpdump -i ens3 port 2152 -w gtp-outside.pcap
 
 sudo tcpdump -i access port 2152 -w gtp-inside.pcap
 
 sudo tcpdump -i core net 172.250.0.0/16 -w n6-inside.pcap
 
-sudo tcpdump -i ens18 net 172.250.0.0/16 -w n6-outside.pcap
+sudo tcpdump -i ens3 net 172.250.0.0/16 -w n6-outside.pcap
 ```
-If the gtp-outside.pcap has packets and the gtp-inside.pcap is empty (no packets captured), you may run the following commands to make sure packets are forwarded from the ens18 interface to the access interface and vice versa:
+If the gtp-outside.pcap has packets and the gtp-inside.pcap is empty (no packets captured), you may run the following commands to make sure packets are forwarded from the ens3 interface to the access interface and vice versa:
 ```
-sudo iptables -A FORWARD -i ens18 -o access -j ACCEPT
+sudo iptables -A FORWARD -i ens3 -o access -j ACCEPT
 
-sudo iptables -A FORWARD -i access -o ens18 -j ACCEPT
+sudo iptables -A FORWARD -i access -o ens3 -j ACCEPT
 ```
 ##   Routing Configuration inside UPF pod
 
