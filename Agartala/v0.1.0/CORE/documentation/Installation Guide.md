@@ -95,18 +95,16 @@ sudo ethtool -K \<core-interface\> gro off
 
 ###  Download core image
 
-create a directory for IOSMCN-Core in home directory as per the following commands
+Create a directory for IOSMCN-Core in home directory as per the following commands:
 ```
 cd
-
 mkdir IOSMCN-Core
-
 cd IOSMCN-Core
 ```
-Download file: [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz) to the directory
+Download file [iosmcn.agartala.v0.1.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz) to the directory.
 ```
+wget https://github.com/ios-mcn/ios-mcn-releases/raw/refs/heads/main/Agartala/v0.1.0/CORE/release-images/iosmcn.agartala.v0.1.0.core.images.tar.gz
 tar -xvzf iosmcn.agartala.v0.1.0.core.images.tar.gz
-
 cd iosmcn.agartala.v0.1.0.core.images/IOSMCN-CoreDpm
 ```
 This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that cluster, and then connect that IOSMCN-Core to either an emulated 5G RAN or physical RAN.
