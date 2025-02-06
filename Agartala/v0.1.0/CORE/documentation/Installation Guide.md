@@ -116,7 +116,7 @@ This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that 
 Open the hosts.ini file
 
 ```
-_vi hosts.ini_
+vi hosts.ini
 ```
 
 Update IP address, username and password of the system
@@ -128,7 +128,7 @@ _node1  ansible_host=10.176.26.86 ansible_user=ios5gn ansible_password=ios5gn an
 Open vars/main.yml
 
 ```
-_vi  vars/main.yml_
+vi  vars/main.yml
 ```
 Update data_iface name on _core_:
 
@@ -190,7 +190,7 @@ Figure 2: Output of Kubernetes installation
 
 ###  Pre-Configuration for IOSMCN-Core
 
-Verify the netpan file is configured with IP, Gateway and DNS address.
+Verify the netplan file is configured with IP, Gateway and DNS address.
 
 Common filenames include:
 
