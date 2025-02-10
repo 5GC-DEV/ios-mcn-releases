@@ -47,7 +47,7 @@ cd smf-0.0.6.iosmcn.core.smf
 
 *\<nf>* can be amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
-Step 5: Create a new repository in [GitHub](https://github.com/new). Name the repository as any one of the network function - amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
+Step 5: Create a new repository in [GitHub](https://github.com/new). Name the repository as any one of the network functions - amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
 Step 6: Create a new branch named _iosmcnmaster_ and set is as default branch.
 
