@@ -57,9 +57,9 @@ Step 8: A GitHub workflow is already set up for building the release image. Modi
 
 Step 9: For building amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, metricfunc - open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12  - Step 13.
 
-Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 10.1 to Step 10.2 before proceeding with Step 12 - Step 13.
+Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 12 - Step 13. Before that, apply the modifications from Step 10.1 to Step 10.2:
 
-- Step 10.1: Remove the following line in each jobs of the workflow:
+- Step 10.1: Remove the following line in each jobs of the _iosmcn-master.yml_ workflow:
   > if: github.repository_owner == 'ios-mcn-core'
 
 - Step 10.2: Open the python file _env\rebuild_images_iosmcn.py_ and modify the container registry path to the one created by the user (line number 43).
@@ -68,7 +68,7 @@ Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-
   Eg.,
   > TARGET_REPO = 'docker.io/iosmcncorereg/bess_build'
 
-Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 11.1 to Step 11.2 before proceeding with Step 12 - Step 13.
+Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12 - Step 13. Before that, apply the modifications from Step 11.1 to Step 11.2:
  - Step 11.1: Open the _Makefile_IOSMCN_ file and modify the GitHub UPF repository path to the user created one (line number 58).
 
     >--label org.opencontainers.image.source="https://github.com\/\<github-username>/upf" \
@@ -92,6 +92,8 @@ Step 15: Go to **Actions tab** in the GitHub repository. Select the IOSMCN Relea
 Step 16: Click on **Run workflow** to manually trigger the workflow.
 
 Step 17: Once the workflow completes successfully, the built image will be pushed to the configured container registry.
+
+**Note**: If you want to tag the bess image as the release image, use the **\.github\workflows\iosmcn-release-push.yml** worflow. Modify the _STABLE_TAG_ variable with the newly built image tag(non-release) of bess. The bess release image has no dependency with the upf build process.
 
 ## Deployment
 
