@@ -68,7 +68,7 @@ Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-
   Eg.,
   > TARGET_REPO = 'docker.io/iosmcncorereg/bess_build'
 
-Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12 - Step 13. Before that, apply the modifications from Step 11.1 to Step 11.2:
+Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12 - Step 13. Before that, apply the modifications from Step 11.1 to Step 11.3:
  - Step 11.1: Open the _Makefile_IOSMCN_ file and modify the GitHub UPF repository path to the user created one (line number 58).
 
     >--label org.opencontainers.image.source="https://github.com\/\<github-username>/upf" \
@@ -80,6 +80,12 @@ Step 11: For building upf - make sure that bess is already built. Open the workf
 
     Eg.,
 	>FROM docker.io/iosmcncorereg/bess_build:latest AS bess-build
+
+ - Step 11.3: Open the _Dockerfile_IOSMCN_ file and modify the Bess GitHub repository path to the user created one (line number 26).
+    >FROM RUN git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com\/\<github-username>/bess.git . && \
+
+    Eg.,
+	>RUN git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/iosmcncoregit/bess.git . && \
 
 Step 12: Update the container registry values in the variables - *REGISTRY*, *DOCKER_REGISTRY* (docker.io, ghcr.io).
 
