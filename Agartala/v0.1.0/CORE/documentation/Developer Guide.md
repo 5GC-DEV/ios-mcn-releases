@@ -55,21 +55,31 @@ Step 7: Push the extracted network function code to the newly created repository
 
 Step 8: A GitHub workflow is already set up for building the release image. Modify the workflow to build and push the image to the container registry.
 
-Step 9: For building amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, metricfunc - open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12  - Step 17.
+Step 9: For building amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, metricfunc - open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12  - Step 13.
 
-Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 12 - Step 17.
+Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 10.1 to Step 10.2 before proceeding with Step 12 - Step 13.
 
 - Step 10.1: Remove the following line in each jobs of the workflow:
   > if: github.repository_owner == 'ios-mcn-core'
 
-- Step 10.2: Open the python file _rebuild_images_iosmcn.py_ and modify the container registry path to the one created by the user (line number 43).
-  > TARGET_REPO = 'ghcr.io/ios-mcn-core/bess_build'
+- Step 10.2: Open the python file _env\rebuild_images_iosmcn.py_ and modify the container registry path to the one created by the user (line number 43).
+  > TARGET_REPO = '\<registry.io>/\<registry-username>/bess_build'
+  
+  Eg.,
+  > TARGET_REPO = 'docker.io/iosmcncorereg/bess_build'
 
-Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12 - Step 17.
+Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 11.1 to Step 11.2 before proceeding with Step 12 - Step 13.
  - Step 11.1: Open the _Makefile_IOSMCN_ file and modify the GitHub UPF repository path to the user created one (line number 58).
-	>--label org.opencontainers.image.source="https://github.com/ios-mcn-core/upf" \
+
+    >--label org.opencontainers.image.source="https://github.com\/\<github-username>/upf" \
+
+	Eg.,
+	>--label org.opencontainers.image.source="https://github.com/iosmcncoregit/upf" \
  - Step 11.2: Open the _Dockerfile_IOSMCN_ file and modify the Bess container registry repository path to the user created one (line number 6).
-	>FROM ghcr.io/ios-mcn-core/bess_build:latest AS bess-build
+    >FROM \<registry.io>/\<registry-username>/bess_build:latest AS bess-build
+
+    Eg.,
+	>FROM docker.io/iosmcncorereg/bess_build:latest AS bess-build
 
 Step 12: Update the container registry values in the variables - *REGISTRY*, *DOCKER_REGISTRY* (docker.io, ghcr.io).
 
