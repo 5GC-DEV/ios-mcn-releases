@@ -47,27 +47,41 @@ cd smf-0.0.6.iosmcn.core.smf
 
 *\<nf>* can be amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
-Step 5: Create a new repository in [GitHub](https://github.com/new).
+Step 5: Create a new repository in [GitHub](https://github.com/new). Name the repository as any one of the network function - amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, upf, metricfunc, bess.
 
 Step 6: Create a new branch named _iosmcnmaster_ and set is as default branch.
 
-Step 7: Push the extracted code to the newly created repository. Follow the [GitHub documentation](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) for detailed steps. Make sure the code is pushed to the _iosmcnmaster_ branch.
+Step 7: Push the extracted network function code to the newly created repository. Follow the [GitHub documentation](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) for detailed steps. Make sure the code is pushed to the _iosmcnmaster_ branch.
 
 Step 8: A GitHub workflow is already set up for building the release image. Modify the workflow to build and push the image to the container registry.
 
-Step 9: Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 10 - Step 11.
+Step 9: For building amf, smf, ausf, nrf, pcf, udm, udr, simapp, nssf, metricfunc - open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12  - Step 17.
 
-Step 10: Update the container registry values in the variables - *REGISTRY*, *DOCKER_REGISTRY* (docker.io, ghcr.io).
+Step 10: For building bess - open the workflow file **\.github\workflows\iosmcn-master.yml** and make the following modifications from Step 12 - Step 17.
 
-Step 11: Update the container registry repository username value in the variable - *DOCKER_REPOSITORY*.
+- Step 10.1: Remove the following line in each jobs of the workflow:
+  > if: github.repository_owner == 'ios-mcn-core'
 
-Step 12: Create Secrets for container registry repository username and password with key named - GHCRUSER & GHCRPASS. Refer the [GitHub documentation](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
+- Step 10.2: Open the python file _rebuild_images_iosmcn.py_ and modify the container registry path to the one created by the user (line number 43).
+  > TARGET_REPO = 'ghcr.io/ios-mcn-core/bess_build'
 
-Step 13: Go to **Actions tab** in the GitHub repository. Select the IOSMCN Release Workflow.
+Step 11: For building upf - make sure that bess is already built. Open the workflow file **\.github\workflows\iosmcn-release-push.yml** and make the following modifications from Step 12 - Step 17.
+ - Step 11.1: Open the _Makefile_IOSMCN_ file and modify the GitHub UPF repository path to the user created one (line number 58).
+	>--label org.opencontainers.image.source="https://github.com/ios-mcn-core/upf" \
+ - Step 11.2: Open the _Dockerfile_IOSMCN_ file and modify the Bess container registry repository path to the user created one (line number 6).
+	>FROM ghcr.io/ios-mcn-core/bess_build:latest AS bess-build
 
-Step 14: Click on **Run workflow** to manually trigger the workflow.
+Step 12: Update the container registry values in the variables - *REGISTRY*, *DOCKER_REGISTRY* (docker.io, ghcr.io).
 
-Step 15: Once the workflow completes successfully, the built image will be pushed to the configured container registry.
+Step 13: Update the container registry repository username value in the variable - *DOCKER_REPOSITORY*.
+
+Step 14: Create Secrets for container registry repository username and password with key named - GHCRUSER & GHCRPASS. Refer the [GitHub documentation](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
+
+Step 15: Go to **Actions tab** in the GitHub repository. Select the IOSMCN Release Workflow or IOSMCN Master Workflow(based on the network function).
+
+Step 16: Click on **Run workflow** to manually trigger the workflow.
+
+Step 17: Once the workflow completes successfully, the built image will be pushed to the configured container registry.
 
 ## Deployment
 
