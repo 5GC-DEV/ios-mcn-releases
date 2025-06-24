@@ -184,7 +184,7 @@ Ensure device group and DNS settings are correct. Update DNN and QCI based on th
 
 Set the appropriate sst, sd, MCC and MNC
 
-![alt text](images/image-10.png)
+![alt text](images/install/image-10.png)
 
 ### Install Kubernetes
 
@@ -222,7 +222,7 @@ nano /etc/netplan/00-installer-config.yaml
 
 eg.,
 
-![Netplan configuration](./images/install/fig7-netplan-image.PNG)
+![Netplan configuration](./images/install/fig7-netplan-image.png)
 
 where,
 
