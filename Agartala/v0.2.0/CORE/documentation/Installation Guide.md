@@ -151,7 +151,7 @@ Set the node IP to the core machine IP, and update the username and password bas
 
 Set data_iface appropriately.
 
-> For multiple-dnn-ims support, use values_file as deps/5gc/roles/core/templates/cdac5gc-5g-multiple-dnn-ims-values.yaml
+> For multiple-dnn-ims support, use values_file as deps/5gc/roles/core/templates/iosmcn-5g-multiple-dnn-ims-values.yaml
 
 ![alt text](images/install/image-4.png)
 
