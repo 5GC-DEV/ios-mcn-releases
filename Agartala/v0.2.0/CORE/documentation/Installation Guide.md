@@ -237,38 +237,6 @@ If any change on the configuration, execute the command:
 sudo netplan apply
 ```
 
-### Configure IOSMCN-Core
-
-Modify the subscribers block of the omec-sub-provision section in file _deps/5gc/roles/core/templates/iosmcn-5g-values.yaml_ to record the IMSI, OPc, and Key values configured onto your SIM cards. For example, the following code block adds IMSIs between 001010000000001 and 001010000000003
-
-![](./images/install/fig3-config-sd-core.png)
-
-Further down in the same omec-sub-provision section you will find two other blocks that also need to be edited. The first, device-groups, assigns IMSIs to _Device Groups_. You will need to reenter the individual IMSIs from the subscribers block that will be part of the device-group. Also, update the DNS.
-
-![](./images/install/fig4-config-sd-core.png)
-
-The second block, network-slices, sets various parameters associated with the _Slices_ that connect device groups to applications. Here, you will need to reenter the PLMN information
-
-![](./images/install/fig5-config-sd-core.png)
-
-### Install IOSMCN-Core
-
-Initiate the installation by the command
-
-```
-make aether-5gc-install
-```
-
-The successful outcome shall be verified using the following command
-
-```
-kubectl get pods -n iosmcn
-```
-
-![](./images/install/fig6-install-sd-core.png)
-
-_Figure 3: Success state of IOSMCN-Core installation_
-
 ## Add Route in gNB
 
 In core machine, run following command to get the AMF service IP:
