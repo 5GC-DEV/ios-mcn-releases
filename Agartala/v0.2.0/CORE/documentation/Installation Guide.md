@@ -100,6 +100,36 @@ Find the interface from the _ifconfig_ command and input the interface name to t
 ```
 sudo ethtool -K \<core-interface\> gro off
 ```
+### Set Static IP using Netplan
+
+Verify that the Netplan configuration file includes the correct IP address, gateway, and DNS server settings.
+
+Common Netplan config file paths:
+
+- /etc/netplan/50-cloud-init.yaml
+- /etc/netplan/01-netcfg.yaml
+- /etc/netplan/00-installer-config.yaml
+
+```
+nano /etc/netplan/00-installer-config.yaml
+```
+
+eg.,
+
+![Netplan configuration](./images/install/fig7-netplan-image.png)
+
+where,
+
+- Replace _ens3_ with the system's network interface.
+- Under the interface section, set the addresses field to the system's IP address.
+- Specify the DNS IP under nameservers.addresses.
+- If no DNS is configured on the network, use 8.8.8.8 as the DNS IP.
+
+If any change on the configuration, execute the command:
+
+```
+sudo netplan apply
+```
 
 ## Installation of IOS-MCN Core
 
@@ -198,37 +228,6 @@ The successful output looks like
 ![Output of Kubernetes installation](./images/install/fig2-output-kubernetes.png)
 
 Figure 2: Output of Kubernetes installation
-
-### Pre-Configuration for IOSMCN-Core
-
-Verify the netplan file is configured with IP, Gateway and DNS address.
-
-Common filenames include:
-
-- /etc/netplan/50-cloud-init.yaml
-- /etc/netplan/01-netcfg.yaml
-- /etc/netplan/00-installer-config.yaml
-
-```
-nano /etc/netplan/00-installer-config.yaml
-```
-
-eg.,
-
-![Netplan configuration](./images/install/fig7-netplan-image.png)
-
-where,
-
-- Replace _ens3_ with the system's network interface.
-- Under the interface section, set the addresses field to the system's IP address.
-- Specify the DNS IP under nameservers.addresses.
-- If no DNS is configured on the network, use 8.8.8.8 as the DNS IP.
-
-If any change on the configuration, execute the command:
-
-```
-sudo netplan apply
-```
 
 ### Install IOSMCN-Core
 
