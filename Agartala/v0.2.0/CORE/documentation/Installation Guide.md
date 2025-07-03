@@ -105,14 +105,6 @@ sudo ethtool -K \<core-interface\> gro off
 
 ### Download core image
 
-Create a directory for IOSMCN-Core in home directory as per the following commands:
-
-```
-cd
-mkdir IOSMCN-Core
-cd IOSMCN-Core
-```
-
 Download file [iosmcn.agartala.v0.2.0.core.images.tar.gz](../release-images/iosmcn.agartala.v0.2.0.core.images.tar.gz) to the directory.
 
 ```
