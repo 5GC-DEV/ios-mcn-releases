@@ -183,6 +183,7 @@ Set the appropriate sst, sd, MCC and MNC
 Start installation with the command
 
 ```
+cd IOSMCN-CoreDpm
 make aether-k8s-install
 ```
 
