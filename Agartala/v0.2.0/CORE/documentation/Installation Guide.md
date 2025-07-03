@@ -137,7 +137,7 @@ Set the node IP to the core machine IP, and update the username and password bas
 
 ![alt text](images/install/image-3.png)
 
-#### Update main.yml
+#### Update main.yml in vars
 
 - Configure data_iface and values_file
 
@@ -158,7 +158,7 @@ Use the cloned ios-mcn-core-helm-chart directory as the local chart
 
 ![alt text](images/install/image-6.png)
 
-#### Update iosmcn-5g-multiple-dnn-ims-values.yml
+#### Update iosmcn-5g-multiple-dnn-ims-values.yml in deps/5gc/roles/core/templates
 
 - Modify Subscriber Details
   Add/update subscriber information as needed
