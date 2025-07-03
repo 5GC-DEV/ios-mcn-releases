@@ -237,6 +237,24 @@ If any change on the configuration, execute the command:
 sudo netplan apply
 ```
 
+### Install IOSMCN-Core
+
+Initiate the installation by the command
+
+```
+make aether-5gc-install
+```
+
+The successful outcome shall be verified using the following command
+
+```
+kubectl get pods -n iosmcn
+```
+
+![](./images/install/fig6-install-sd-core.png)
+
+_Figure 3: Success state of IOSMCN-Core installation_
+
 ## Add Route in gNB
 
 In core machine, run following command to get the AMF service IP:
