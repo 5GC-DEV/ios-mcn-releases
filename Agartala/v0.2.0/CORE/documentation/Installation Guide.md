@@ -157,6 +157,8 @@ git clone https://github.com/ios-mcn-core/ios-mcn-core-helm-chart.git
 
 ```
 git clone --recursive https://github.com/5GC-DEV/CDAC-CoreDpm.git
+cd CDAC-CoreDpm
+git checkout tags/ios-mcn-core-release-0.2.0
 ```
 
 #### Update Configuration Files
