@@ -151,7 +151,7 @@ This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that 
 
 ```
 git clone https://github.com/ios-mcn-core/ios-mcn-core-helm-chart.git
-cd ios-mcn-core
+cd ios-mcn-core-helm-chart
 git checkout tags/v0.2.0
 ```
 
