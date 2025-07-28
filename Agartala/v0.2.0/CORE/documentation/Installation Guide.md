@@ -158,9 +158,9 @@ git checkout tags/v0.2.0
 #### Clone the Ansible Chart
 
 ```
-git clone --recursive https://github.com/5GC-DEV/CDAC-CoreDpm.git
-cd CDAC-CoreDpm
-git checkout tags/ios-mcn-core-release-0.2.0
+git clone --recursive https://github.com/ios-mcn-core/IOSMCN-CoreDpm.git
+cd IOSMCN-CoreDpm
+git checkout tags/ios-mcn-core-rel0.2.0
 ```
 
 #### Update Configuration Files
