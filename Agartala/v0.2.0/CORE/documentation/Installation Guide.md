@@ -147,22 +147,6 @@ This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that 
 
 ### Target Parameter Settings
 
-#### Clone the Helm Chart
-
-```
-git clone https://github.com/ios-mcn-core/ios-mcn-core-helm-chart.git
-cd ios-mcn-core-helm-chart
-git checkout tags/v0.2.0
-```
-
-#### Clone the Ansible Chart
-
-```
-git clone --recursive https://github.com/ios-mcn-core/IOSMCN-CoreDpm.git
-cd IOSMCN-CoreDpm
-git checkout tags/ios-mcn-core-rel0.2.0
-```
-
 #### Update Configuration Files
 
 ##### Update the hosts.ini
