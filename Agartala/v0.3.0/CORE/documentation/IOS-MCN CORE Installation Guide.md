@@ -268,7 +268,7 @@ In core machine, run following command to get the NFs service IP:
 kubectl get svc -n iosmcn
 ```
 
-![](./images/install/fig17.png)
+![](./images/install/NFs-svc.png)
 
 Add route in IMS server machine to NFs service IP:
 
