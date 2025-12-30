@@ -204,7 +204,7 @@ Set the appropriate sst, sd, MCC and MNC
 Start installation with the command
 
 ```
-cd iosmcn.agartala.v0.3.0.core.images/IOSMCN-CoreDpm
+cd iosmcn.agartala.v0.4.0.core.images/IOSMCN-CoreDpm
 make iosmcn-k8s-install
 ```
 
