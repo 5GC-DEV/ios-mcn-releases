@@ -140,12 +140,12 @@ Download file [iosmcn.agartala.v0.4.0.core.images.tar.gz](../release-images/iosm
 
 ```
 wget https://github.com/ios-mcn/ios-mcn-releases/raw/main/Agartala/v0.4.0/CORE/release-images/iosmcn.agartala.v0.4.0.core.images.tar.gz
-tar -xvzf iosmcn.agartala.v0.4.0.core.images.tar.gz
+tar -xvf iosmcn.agartala.v0.4.0.core.images.tar.gz
 cd iosmcn.agartala.v0.4.0.core.images/IOSMCN-CoreDpm
 ```
 
 This brings up a Kubernetes cluster, deploy a 5G version of IOSMCN-Core on that cluster, and then connect that IOSMCN-Core to either an emulated 5G RAN or physical RAN.
-### ios-mcn-core single slice deployment
+## ios-mcn-core single slice deployment
 ### Target Parameter Settings
 ```cd iosmcn.agartala.v0.4.0.core.images/IOSMCN-CoreDpm```
 #### Update Configuration Files
@@ -170,7 +170,7 @@ Set data_iface appropriately.
 
 Use the cloned ios-mcn-core-helm-chart directory as the local chart
 
-![alt text](images/install/helm-chart-path.png)
+![alt text](images/install/helm-chart.png)
 
 - Update AMF IP
   Ensure the AMF IP is correctly updated. (AMF IP is core machine IP)
@@ -238,7 +238,7 @@ kubectl get pods -n iosmcn
 
 _Figure 3: Success state of IOSMCN-Core installation_
 
-### ios-mcn-core multiple slice deployment
+## ios-mcn-core multiple slice deployment
 ### Target Parameter Settings
 ```cd iosmcn.agartala.v0.4.0.core.images/IOSMCN-CoreDpm```
 #### Update Configuration Files
@@ -260,8 +260,9 @@ Update data_iface and chart_ref based on your iosmcn-core-helm-chart path.
 
 Use the cloned ios-mcn-core-helm-chart directory as the local chart
 
-![alt text](images/install/helm-chart-path.png)
-![alt text](images/install/helm-chart-path-2.png)
+![alt text](images/install/helm-chart.png)
+
+![alt text](images/install/helm-chart-slice.png)
 
 - Update AMF IP
   Ensure the AMF IP is correctly updated. (AMF IP is core machine IP)
