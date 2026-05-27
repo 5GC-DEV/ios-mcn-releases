@@ -1,5 +1,5 @@
 ﻿
-# **IOS MCN v1.0.0 Agartala Release** **User Guide: IOSMCN-Core v0.4**
+# **IOS MCN v1.0.0 Agartala Release** **User Guide: IOSMCN-Core v1.0**
 
 ## Introduction
 
